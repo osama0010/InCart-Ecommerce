@@ -10,10 +10,12 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { BrandsComponent } from './components/brands/brands.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductComponent } from './components/product/product.component';
+import { authGuard } from './core/guards/auth.guard';
+import { logedGuard } from './core/guards/loged.guard';
 
 export const routes: Routes = [
     {
-        path: '', component: AuthLayoutComponent, 
+        path: '', component: AuthLayoutComponent, canActivate: [logedGuard],
         children: [
             { path: "", redirectTo: "login", pathMatch: "full" },
             { path: "login", component: LoginComponent },
@@ -22,7 +24,7 @@ export const routes: Routes = [
     },
 
     {
-        path: '', component: BlankLayoutComponent, 
+        path: '', component: BlankLayoutComponent, canActivate: [authGuard], 
         children: [
             { path: "", redirectTo: "home", pathMatch: "full" },
             { path: "home", component: HomeComponent },

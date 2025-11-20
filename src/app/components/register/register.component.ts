@@ -4,6 +4,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -54,6 +55,8 @@ export class RegisterComponent {
     }
   }
 
+  RegisterSubscription!: Subscription;
+
 
   registerSubmit(): void {
     if (this.registerForm.valid) {
@@ -85,7 +88,10 @@ export class RegisterComponent {
       this.registerForm.setErrors({ mismatch: true });
       this.msgError = 'Please fill out the form correctly.';
     }
+  }
 
+  ngOnDestroy(): void {
+    this.RegisterSubscription?.unsubscribe();
   }
 
 

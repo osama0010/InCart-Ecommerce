@@ -1,3 +1,61 @@
+
+<section>
+    <div class="row g-0">
+        <div class="col-md-10">
+              <owl-carousel-o [options]="customOptionsMainSlide">
+                <ng-template carouselSlide>
+                    <img src="./assets/images/img2.avif" height="400px" class="w-100" alt="Slider Image1" />
+                </ng-template>  
+                                <ng-template carouselSlide>
+                    <img src="./assets/images/img1.avif" height="400px" class="w-100" alt="Slider Image2" />
+                </ng-template>  
+                                <ng-template carouselSlide>
+                    <img src="./assets/images/img3.avif" height="400px" class="w-100" alt="Slider Image3" />
+                </ng-template>  
+                                <ng-template carouselSlide>
+                    <img src="./assets/images/img4.avif" height="400px" class="w-100" alt="Slider Image4" />
+                </ng-template>  
+                                <ng-template carouselSlide>
+                    <img src="./assets/images/img5.avif" height="400px" class="w-100" alt="Slider Image5" />
+                </ng-template>  
+                                <ng-template carouselSlide>
+                    <img src="./assets/images/img6.avif" height="400px" class="w-100" alt="Slider Image6" />
+                </ng-template>  
+                                <ng-template carouselSlide>
+                    <img src="./assets/images/img7.avif" height="400px" class="w-100" alt="Slider Image7" />
+                </ng-template>  
+            </owl-carousel-o>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <img src="./assets/images/grocery-banner.png" height="200px" class="w-100" alt="Side Image 1" />
+                <img src="./assets/images/grocery-banner-2.jpeg" height="200px" class="w-100" alt="Side Image 2" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="py-3">
+    <h2>Popular Categories</h2>
+
+    <owl-carousel-o [options]="customOptionsCateg">
+
+        @for (categ of categoriesList; track categ._id) {
+        <ng-template carouselSlide>
+            <!-- Content Here -->
+            <div>
+                <img [src]="categ.image" height="200px" class="w-100" [alt]="categ.name" >
+                <h3 class="h6 text-main text-center">{{categ.name}}</h3>
+            </div>
+        </ng-template>
+        }
+
+  </owl-carousel-o>
+
+</section>
+
+<!-- Products -->
 <section class="py-3">
     <h2>Popular Products</h2>
     <div class="row g-3">
@@ -14,11 +72,11 @@
 
                     <div>
                         @for (item of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) {
-                            <span><i class="fas fa-star rating-color"></i></span>
+                        <span><i class="fas fa-star rating-color"></i></span>
                         }
 
                         @if (product.ratingsAverage % 1 !== 0) {
-                            <span><i class="fas fa-star-half-alt rating-color"></i></span>
+                        <span><i class="fas fa-star-half-alt rating-color"></i></span>
                         }
 
                         <span class="text-muted">{{product.ratingsAverage}}</span>

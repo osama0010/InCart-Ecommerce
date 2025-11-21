@@ -14,40 +14,47 @@ export class AuthService {
 
   private readonly _HttpClient = inject(HttpClient);
   private readonly _Router = inject(Router);
-  
-  userData:any = null;
+
+  userData: any = null;
 
 
-  setRegisterForm(data: object): Observable<any>
-  {
+  setRegisterForm(data: object): Observable<any> {
     return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signup`, data);
   }
 
-  setloginForm(data: object): Observable<any>
-  {
+  setloginForm(data: object): Observable<any> {
     return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/signin`, data);
   }
 
-  decodeUserToken(): void
-  {
+  decodeUserToken(): void {
     // get token from localstorage
-    if(localStorage.getItem('userToken') !== null){
+    if (localStorage.getItem('userToken') !== null) {
       // decode token to get user data
-    this.userData = jwtDecode(localStorage.getItem('userToken')!);
-    console.log(this.userData);
+      this.userData = jwtDecode(localStorage.getItem('userToken')!);
+      console.log(this.userData);
     }
   }
 
-
-  logOut(): void
-  {
+  logOut(): void {
     // remove token from localstorage
     localStorage.removeItem('userToken');
     this.userData = null;
     // Call Api remove token from backend
-    
+
     // redirect to login page
     this._Router.navigate(['/login']);
+  }
+
+  setEmailVerify(data: object): Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/forgotPasswords`, data)
+  }
+
+  setCodeVerify(data: object): Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/verifyResetCode`, data)
+  }
+
+  resetPassword(data: object): Observable<any> {
+    return this._HttpClient.put(`${environment.baseUrl}/api/v1/auth/resetPassword`, data)
   }
 
 }

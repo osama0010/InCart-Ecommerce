@@ -2,13 +2,13 @@ import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -39,6 +39,7 @@ export class LoginComponent {
           console.log('Login successful:', response);
           this.msgError = '';
           if (response.message == 'success') {
+            this.msgSuccess = true;
             setTimeout(() => {
 
               // 1. save token to localstorage
@@ -46,7 +47,6 @@ export class LoginComponent {
               // 2. decode token to get user data
               this._AuthService.decodeUserToken();
               // 3. navigate to home
-              this.msgSuccess = true;
               this._Router.navigate(['/home']);
             }, 3000);
           }

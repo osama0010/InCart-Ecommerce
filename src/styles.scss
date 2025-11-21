@@ -4,7 +4,7 @@
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 :root {
   // --main-color: #0aad0a;
-    --main-color: #e62330;
+  --main-color: #ffa70e;
   --light-color: #f3f0f0;
   --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
     rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
@@ -46,7 +46,7 @@ a:hover {
 }
 
 .product:hover {
-  box-shadow: 0 0 10px #11bd1168;
+  box-shadow: 0 0 10px #f44a2b;
 }
 
 .product .btn-main {
@@ -87,5 +87,5 @@ a:hover {
   background-color: #ccc;
 }
 .btn-main:hover {
-  background-color: black;
+  background-color: rgb(247, 101, 3);
 }

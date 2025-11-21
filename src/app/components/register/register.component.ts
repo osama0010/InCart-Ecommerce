@@ -41,6 +41,20 @@ export class RegisterComponent {
   //   phone: new FormControl(null, [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]),
   // }, this.confirmPassword);
 
+  dataForm = {
+    name: 'osama',
+    email: 'osama0@mail.com',
+    phone: '01019768630'
+  }
+
+  ngOnInit(): void {
+    this.registerForm.patchValue({
+      name: this.dataForm.name,
+      email: this.dataForm.email,
+      phone: this.dataForm.phone
+    });
+    
+  }
 
 
   // Custom validator to check if password and rePassword match

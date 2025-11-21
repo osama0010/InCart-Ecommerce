@@ -5,11 +5,12 @@ import { Subscription } from 'rxjs';
 import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule],
+  imports: [CarouselModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getAllProductsSub!:Subscription
 
+  
   customOptionsCateg: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -52,7 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     nav: false
   }
 
-    customOptionsMainSlide: OwlOptions = {
+  customOptionsMainSlide: OwlOptions = {
     loop: true,
     mouseDrag: true,
     touchDrag: true,

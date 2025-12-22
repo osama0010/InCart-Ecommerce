@@ -1,1 +1,37 @@
-<p>cart works!</p>
+<section class="bg-main-light rounded-4 shadow p-4 my-2 w-75 mx-auto">
+    <h2 class="text-center">Shopping Cart</h2>
+
+    <div class="d-flex justify-content-between">
+        <span>Total Products' Price: <p class="text-main">{{CartDetails.totalCartPrice | currency : 'GBP'}}</p></span>
+        <div>
+            <button (click)="Clearcart()" class="btn btn-outline-danger">Clear Cart</button>
+        </div>
+    </div>
+    <hr />
+
+    @for (item of CartDetails.products; track $index) {
+    <div class="row border-bottom mb-1">
+        <div class="col-md-1">
+            <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-100" />
+        </div>
+        <div class="col-md-11 d-flex align-items-center justify-content-between">
+            <div>
+                <h4>{{item.product.title}}</h4>
+                <p class="text-main m-0">Price: {{item.price}}</p>
+                <button (click)="removeProduct(item.product._id)" class="btn text-danger p-0"><i
+                        class="fa-solid fa-trash p-0"></i>remove</button>
+            </div>
+            <div class="gap-2 d-flex justify-content-center">
+                <span (click)="updateCount(item.product.id, item.count-1)" class="text-danger cursor-pointer"><i
+                        class="fa-solid fa-circle-minus fa-2xl"></i></span>
+                <span class="fw-bold"> {{item.count}} </span>
+                <span (click)="updateCount(item.product.id, item.count+1)" class="text-success cursor-pointer"><i
+                        class="fa-solid fa-circle-plus fa-2xl"></i></span>
+            </div>
+        </div>
+    </div>
+    }
+
+    <button [routerLink]="['/orders', CartDetails._id]" class="btn btn-success mt-4">Order</button>
+
+</section>

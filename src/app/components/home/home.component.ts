@@ -6,11 +6,17 @@ import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
+import { CurrencyPipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { TermtextPipe } from '../../pipes/termtext.pipe';
+import { SearchPipe } from '../../pipes/search.pipe';
+import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule, RouterLink],
+  imports: [CarouselModule, RouterLink, FormsModule, TermtextPipe, SearchPipe, TitleCasePipe, CurrencyPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -18,14 +24,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private readonly _ProductsService = inject(ProductsService);
   private readonly _CategoriesService = inject(CategoriesService);
+  private readonly _CartService = inject(CartService);
+  private readonly _ToastrService = inject(ToastrService);
 
 
-  productsList:IProduct[] = [];
-  categoriesList:ICategory[] = [];
 
-  getAllProductsSub!:Subscription
+  productsList: IProduct[] = [];
+  categoriesList: ICategory[] = [];
+  searchInput: string = '';
 
-  
+  getAllProductsSub!: Subscription
+
+
   customOptionsCateg: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -85,7 +95,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.getAllProductsSub = this._ProductsService.getAllProducts().subscribe({
       next: (response) => {
-        console.log('Products:',response);
+        console.log('Products:', response);
         this.productsList = response.data;
       },
       error: (error) => {
@@ -99,6 +109,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Unsubscribe to avoid memory leaks
     this.getAllProductsSub?.unsubscribe();
+  }
+
+
+  addToCart(productId: string): void {
+    this._CartService.addProductToCart(productId).subscribe({
+      next: (response) => {
+        console.log('Product added to cart:', response);
+        // alert('Product added to cart successfully!');
+        this._ToastrService.success(response.message, 'Success');
+      },
+      error: (error) => {
+        console.log('Error adding product to cart:', error);
+        alert('Failed to add product to cart.');
+      }
+    });
   }
 
 

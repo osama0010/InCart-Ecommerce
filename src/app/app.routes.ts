@@ -14,6 +14,8 @@ import { authGuard } from './core/guards/auth.guard';
 import { logedGuard } from './core/guards/loged.guard';
 import { DetailsComponent } from './components/details/details.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { AllordersComponent } from './components/allorders/allorders.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 export const routes: Routes = [
     {
@@ -35,7 +37,10 @@ export const routes: Routes = [
             { path: "categories", component: CategoriesComponent },
             { path: "brands", component: BrandsComponent },
             { path: "cart", component: CartComponent },
-            { path: "details/:ID", component: DetailsComponent }
+            { path: "details/:ID", component: DetailsComponent },
+            { path: "allorders", component: AllordersComponent },
+            { path: "orders/:Id", component: OrdersComponent },
+            { path: '**', component: NotfoundComponent }
 
         ]
     },

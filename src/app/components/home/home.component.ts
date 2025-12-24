@@ -12,6 +12,7 @@ import { SearchPipe } from '../../pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _CategoriesService = inject(CategoriesService);
   private readonly _CartService = inject(CartService);
   private readonly _ToastrService = inject(ToastrService);
+  private readonly _NgxSpinnerService = inject(NgxSpinnerService);
 
 
 

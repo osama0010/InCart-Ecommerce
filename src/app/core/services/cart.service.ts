@@ -15,34 +15,26 @@ export class CartService {
 
   addProductToCart(id: string): Observable<any> {
     return this._HttpClient.post(`${environment.baseUrl}/api/v1/cart`,
-      { productId: id },
-      { headers: this.myHeaders }
+      { productId: id }
     );
   }
 
   getProductsCart(): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/api/v1/cart`,
-      { headers: this.myHeaders }
-    );
+    return this._HttpClient.get(`${environment.baseUrl}/api/v1/cart`);
   }
 
   updateProductQuantity(id: string, newCount: number): Observable<any> {
     return this._HttpClient.put(`${environment.baseUrl}/api/v1/cart/${id}`,
-      { count: newCount },
-      { headers: this.myHeaders }
+      { count: newCount }
     );
   }
 
   deleteSpecificCartProduct(id: string): Observable<any> {
-    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`,
-      { headers: this.myHeaders }
-    );
+    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`);
   }
 
   ClearCart(): Observable<any> {
-    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart`,
-      { headers: this.myHeaders }
-    );
+    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart`);
   }
   
 }

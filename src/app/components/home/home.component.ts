@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     dots: false,
     navSpeed: 700,
     navText: ['', ''],
+    rtl: true,
     responsive: {
       0: {
         items: 1
@@ -78,7 +79,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     navSpeed: 700,
     navText: ['', ''],
     items: 1,
-    nav: true
+    nav: true,
+    rtl: true,
+
   }
 
 

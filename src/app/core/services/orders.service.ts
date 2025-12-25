@@ -18,9 +18,6 @@ export class OrdersService {
       ,{
         
         "shippingAddress": shippingDetails
-      },
-      {
-        headers: this.myHeaders
       }
     );
   }

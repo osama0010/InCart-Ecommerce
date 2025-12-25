@@ -22,11 +22,13 @@
                         class="fa-solid fa-trash p-0"></i>remove</button>
             </div>
             <div class="gap-2 d-flex justify-content-center">
-                <span (click)="updateCount(item.product.id, item.count-1)" class="text-danger cursor-pointer"><i
-                        class="fa-solid fa-circle-minus fa-2xl"></i></span>
+                <span (click)="updateCount(item.product.id, item.count-1)" class="text-danger cursor-pointer">
+                    <i class="fa-solid fa-circle-minus fa-2xl"></i></span>
+
                 <span class="fw-bold"> {{item.count}} </span>
-                <span (click)="updateCount(item.product.id, item.count+1)" class="text-success cursor-pointer"><i
-                        class="fa-solid fa-circle-plus fa-2xl"></i></span>
+                
+                <span (click)="updateCount(item.product.id, item.count+1)" class="text-success cursor-pointer">
+                    <i class="fa-solid fa-circle-plus fa-2xl"></i></span>
             </div>
         </div>
     </div>

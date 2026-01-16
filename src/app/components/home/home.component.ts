@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { Subscription } from 'rxjs';
@@ -31,8 +31,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
 
-  productsList: IProduct[] = [];
-  categoriesList: ICategory[] = [];
+  // productsList: IProduct[] = [];
+  productsList:WritableSignal<IProduct[]> = signal([]);
+  // categoriesList: ICategory[] = [];
+  categoriesList:WritableSignal<ICategory[]> = signal([]);
   searchInput: string = '';
 
   getAllProductsSub!: Subscription
@@ -91,7 +93,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._CategoriesService.getAllCategories().subscribe({
       next: (response) => {
         console.log('Categories:', response);
-        this.categoriesList = response.data;
+        this.categoriesList.set(response.data);
       },
       error: (error) => {
         console.log('Error fetching categories:', error);
@@ -101,7 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getAllProductsSub = this._ProductsService.getAllProducts().subscribe({
       next: (response) => {
         console.log('Products:', response);
-        this.productsList = response.data;
+        this.productsList.set(response.data);
       },
       error: (error) => {
         console.log(error);
@@ -123,6 +125,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log('Product added to cart:', response);
         // alert('Product added to cart successfully!');
         this._ToastrService.success(response.message, 'Success');
+        this._CartService.CartNumber.set(response.numOfCartItems);
       },
       error: (error) => {
         console.log('Error adding product to cart:', error);

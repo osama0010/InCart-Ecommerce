@@ -41,7 +41,7 @@
 
     <owl-carousel-o [options]="customOptionsCateg">
 
-        @for (categ of categoriesList; track categ._id) {
+        @for (categ of categoriesList(); track categ._id) {
         <ng-template carouselSlide>
             <!-- Content Here -->
             <div>
@@ -61,7 +61,7 @@
     <input type="search" class="form-control w-50 mx-auto mb-3" placeholder="Search for products..." [(ngModel)]="searchInput"/>
 
     <div class="row g-3">
-        @for (product of productsList.slice(22,40) | search : searchInput; track product.id) {
+        @for (product of productsList().slice(22,40) | search : searchInput; track product.id) {
         <div class="col-md-2">
             <div class="product p-2">
 

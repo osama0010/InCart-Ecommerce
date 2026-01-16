@@ -36,6 +36,7 @@ export class CartComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.CartDetails = response.data;
+        this._CartService.CartNumber.set(response.numOfCartItems);
       },
       error: (err) => {
         console.error(err);
@@ -68,14 +69,13 @@ export class CartComponent implements OnInit {
     cancelButtonText: 'No, keep it'
   }).then((result) => {
     if (result.isConfirmed) {
-
       // The user clicked YES → Now clear the cart
       this._CartService.ClearCart().subscribe({
         next: (response) => {
           console.log(response);
           this.CartDetails = {} as ICart;
-
           Swal.fire('Cleared!', 'Your cart has been emptied.', 'success');
+          this._CartService.CartNumber.set(0);
         },
         error: (err) => {
           console.error(err);

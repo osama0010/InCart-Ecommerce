@@ -9,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class CategoriesComponent {
 
+  counter : number = 0;
+
+  increaseCounter(){
+    this.counter = this.counter + 1;
+  }
+  decreaseCounter(){
+    this.counter = this.counter - 1;
+  }
 }

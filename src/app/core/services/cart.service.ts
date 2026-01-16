@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from '../environments/enviroment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { count } from 'console';
 
 @Injectable({
@@ -10,6 +10,8 @@ import { count } from 'console';
 export class CartService {
 
   constructor(private _HttpClient: HttpClient) { }
+
+  CartNumber: WritableSignal<number> = signal(0);
 
   myHeaders: any = { token: localStorage.getItem('userToken') };
 
